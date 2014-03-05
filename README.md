@@ -1,6 +1,15 @@
 # EnumHelp
 
-TODO: Write a gem description
+
+
+Extends of ActiveRecord::Enum, which can used in simple_form and internationalization.
+
+Make Enum field correctly generate select field.
+
+As you know in Rails 4.1.0 , ActiveRecord supported Enum method. But it doesn't work fine with I18n and simple_form.
+
+This gem can help you work fine with Enum feather, I18n and simple_form
+
 
 ## Installation
 
@@ -18,11 +27,53 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+In model file:
+
+    class Order < ActiveRecord::Base
+      enum status: { "nopayment" => 0, "finished" => 1 }
+    end
+
+You can call:
+
+    order = Order.first
+    order.update_attribut :status, 0
+    order.status
+    # > nopayment
+    order.status_i18n
+    # > nopayment or 未支付
+
+In _form.html.erb using simple form:
+
+    <%= f.input :status %>
+
+will generate select field with translations.
+
+other arguments for simple_form are supported perfectly.
+
+e.g.
+
+    <%= f.input :status, prompt: 'Please select a stauts' %>
+    
+    <%= f.input :status, as: :string %>
+
+
+I18n local file example:
+
+    # config/locals/model/order.zh-cn.yml
+    zh-cn:
+      enums:
+        order:
+          status:
+            finished: 完成
+            nopayment: 未支付
+
+
+
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/enum_help/fork )
+1. Fork it ( http://github.com/zmbacker/enum_help/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
