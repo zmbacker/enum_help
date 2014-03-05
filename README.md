@@ -47,9 +47,9 @@ In _form.html.erb using simple form:
 
     <%= f.input :status %>
 
-will generate select field with translations.
+This will generate select field with translations automaticlly.
 
-other arguments for simple_form are supported perfectly.
+Other arguments for simple_form are supported perfectly.
 
 e.g.
 
