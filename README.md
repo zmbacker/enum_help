@@ -37,7 +37,7 @@ In model file:
 You can call:
 
     order = Order.first
-    order.update_attribut :status, 0
+    order.update_attribute :status, 0
     order.status
     # > nopayment
     order.status_i18n
