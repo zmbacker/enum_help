@@ -28,6 +28,8 @@ Or install it yourself as:
 ## Usage
 
 
+required Rails 4.1.x
+
 In model file:
 
     class Order < ActiveRecord::Base
