@@ -1,8 +1,6 @@
 # EnumHelp
 
-
-
-Extends of ActiveRecord::Enum, which can used in simple_form and internationalization.
+Help ActiveRecord::Enum feature to work fine with I18n and simple_form.
 
 Make Enum field correctly generate select field.
 
