@@ -70,7 +70,6 @@ I18n local file example:
 
 
 
-
 ## Contributing
 
 1. Fork it ( http://github.com/zmbacker/enum_help/fork )
