@@ -69,6 +69,8 @@ I18n local file example:
             nopayment: 未支付
 
 
+## Thanks
+* [mrhead](https://github.com/mrhead)
 
 ## Contributing
 
