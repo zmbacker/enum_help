@@ -1,3 +1,5 @@
+require 'simple_form'
+
 module EnumHelp
   module SimpleForm
     module BuilderExtension
