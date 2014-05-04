@@ -17,6 +17,8 @@ module EnumHelp
       def initialize(*args)
         super
         raise "Attribute '#{attribute_name}' has no enum class" unless enum = object.class.send(attribute_name.to_s.pluralize)
+        return unless input_options[:collection].blank? && @builder.options[:collection].blank?
+
         collect = enum.collect{|k,v| [::I18n.t("enums.#{object.class.to_s.underscore}.#{attribute_name}.#{k}", default: k),k] }
         # collect.unshift [args.last[:prompt],''] if args.last.is_a?(Hash) && args.last[:prompt]
 
