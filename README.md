@@ -47,7 +47,7 @@ You can call:
     order.status_i18n # if you have an i18n file defined as following, it will return "未支付".
     # > 未支付
 
-In _form.html.erb using simple form:
+In _form.html.erb using simple_form:
 
     <%= f.input :status %>
 
