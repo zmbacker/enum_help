@@ -80,6 +80,15 @@ I18n local file example:
             failed: 失败
             destroyed: 已删除
 
+
+## Notice
+If you want to use enum feature,
+field of your table can't be named with reference.
+When it is named with 'reference' and define enum in model file, there will be raise an error as below:
+
+    NoMethodError: super: no superclass method `enum' for...
+
+
 ## Thanks
 * [mrhead](https://github.com/mrhead)
 * [Jin Lee](https://github.com/neojin)
