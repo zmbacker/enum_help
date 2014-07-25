@@ -6,8 +6,9 @@ module EnumHelp
 
       def default_input_type_with_enum(*args, &block)
         att_name = (args.first || @attribute_name).to_s
+
         return :enum if (args.last.is_a?(Hash) ? args.last[:as] : @options[:as]).nil? &&
-                        object.class.respond_to?(att_name.pluralize)
+                        object.class.respond_to?(att_name.pluralize) && att_name.pluralize != "references"
 
         default_input_type_without_enum(*args, &block)
       end
