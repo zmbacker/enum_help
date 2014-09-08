@@ -53,7 +53,7 @@ order.status_i18n # if you have an i18n file defined as following, it will retur
 
 In _form.html.erb using simple_form:
 
-```ruby
+```erb
 <%= f.input :status %>
 ```
 
@@ -61,7 +61,7 @@ This will generate select field with translations automaticlly.
 
 And if you want to generate select except some values, then you can pass a collection option.
 
-```ruby
+```erb
 <%= f.input :status Order.restricted_statuses %>
 ```
 
@@ -69,7 +69,7 @@ Other arguments for simple_form are supported perfectly.
 
 e.g.
 
-```ruby
+```erb
 <%= f.input :status, prompt: 'Please select a stauts' %>
 
 <%= f.input :status, as: :string %>
