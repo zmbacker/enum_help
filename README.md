@@ -26,7 +26,7 @@ Or install it yourself as:
 ## Usage
 
 
-required Rails 4.1.x
+Required Rails 4.1.x
 
 In model file:
 
@@ -51,7 +51,7 @@ order.status_i18n # if you have an i18n file defined as following, it will retur
 # > 未支付
 ```
 
-In _form.html.erb using simple_form:
+In `_form.html.erb` using `simple_form`:
 
 ```erb
 <%= f.input :status %>
@@ -65,7 +65,7 @@ And if you want to generate select except some values, then you can pass a colle
 <%= f.input :status Order.restricted_statuses %>
 ```
 
-Other arguments for simple_form are supported perfectly.
+Other arguments for `simple_form` are supported perfectly.
 
 e.g.
 
@@ -92,8 +92,7 @@ zh-cn:
 
 
 ## Notice
-If you want to use enum feature,
-field of your table can't be named with reference.
+If you want to use enum feature, field of your table can't be named with `reference`.
 When it is named with 'reference' and define enum in model file, there will be raise an error as below:
 
     NoMethodError: super: no superclass method `enum' for...
