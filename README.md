@@ -62,7 +62,7 @@ This will generate select field with translations automaticlly.
 And if you want to generate select except some values, then you can pass a collection option.
 
 ```erb
-<%= f.input :status Order.restricted_statuses %>
+<%= f.input :status, Order.restricted_statuses %>
 ```
 
 Other arguments for `simple_form` are supported perfectly.
