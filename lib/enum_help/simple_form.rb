@@ -22,7 +22,7 @@ module EnumHelp
         enum = input_options[:collection] || @builder.options[:collection]
         raise "Attribute '#{attribute_name}' has no enum class" unless enum ||= object.class.send(attribute_name.to_s.pluralize)
 
-        collect = enum.collect{|k,v| [::I18n.t("enums.#{object.class.to_s.underscore}.#{attribute_name}.#{k}", default: k),k] }
+        collect = object.class.send("#{attribute_name.to_s.pluralize}_i18n", enum.to_h).to_a
         # collect.unshift [args.last[:prompt],''] if args.last.is_a?(Hash) && args.last[:prompt]
 
         if respond_to?(:input_options)
