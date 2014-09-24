@@ -51,6 +51,12 @@ order.status_i18n # if you have an i18n file defined as following, it will retur
 # > 未支付
 ```
 
+You can also fetch the translated enum collection, if you need to:
+
+```ruby
+Order.statuses_i18n
+```
+
 In `_form.html.erb` using `simple_form`:
 
 ```erb
