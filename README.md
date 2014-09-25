@@ -81,6 +81,15 @@ e.g.
 <%= f.input :status, as: :string %>
 ```
 
+From version 0.0.10, enum_help can automaticlly generate radio buttons with i18n labels.
+
+e.g.
+```erb
+<%= f.input :status, as: :radio_buttons %>
+```
+
+
+
 
 I18n local file example:
 

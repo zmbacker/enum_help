@@ -6,12 +6,21 @@ module EnumHelp
 
       def default_input_type_with_enum(*args, &block)
         att_name = (args.first || @attribute_name).to_s
+        options = args.last
+        return :enum_radio_buttons if options.is_a?(Hash) && options[:as] == :radio_buttons &&
+                                      is_enum_attributes?( att_name )
 
-        return :enum if (args.last.is_a?(Hash) ? args.last[:as] : @options[:as]).nil? &&
-                        object.class.respond_to?(att_name.pluralize) && att_name.pluralize != "references"
+        return :enum if (options.is_a?(Hash) ? options[:as] : @options[:as]).nil? &&
+                        is_enum_attributes?( att_name )
 
         default_input_type_without_enum(*args, &block)
       end
+
+
+      def is_enum_attributes?( attribute_name )
+        object.class.respond_to?(attribute_name.pluralize) && attribute_name.pluralize != "references"
+      end
+
 
     end
 
@@ -45,10 +54,19 @@ class EnumHelp::SimpleForm::EnumInput < ::SimpleForm::Inputs::CollectionSelectIn
   end
 end
 
+
+class EnumHelp::SimpleForm::EnumRadioButtons < ::SimpleForm::Inputs::CollectionRadioButtonsInput
+  include EnumHelp::SimpleForm::InputExtension
+
+end
+
+
 SimpleForm::FormBuilder.class_eval do
   include EnumHelp::SimpleForm::BuilderExtension
 
-  map_type :enum, :to => EnumHelp::SimpleForm::EnumInput
+  map_type :enum,               :to => EnumHelp::SimpleForm::EnumInput
+  map_type :enum_radio_buttons, :to => EnumHelp::SimpleForm::EnumRadioButtons
+  alias_method :collection_enum_radio_buttons, :collection_radio_buttons
   alias_method :collection_enum, :collection_select
   alias_method_chain :default_input_type, :enum
 end
