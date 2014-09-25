@@ -105,8 +105,8 @@ When it is named with 'reference' and define enum in model file, there will be r
 
 
 ## Thanks
-* [mrhead](https://github.com/mrhead)
-* [Jin Lee](https://github.com/neojin)
+
+Thanks for all the [contributors](https://github.com/zmbacker/enum_help/graphs/contributors).
 
 ## Contributing
 
