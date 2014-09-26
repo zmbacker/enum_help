@@ -31,7 +31,14 @@ module EnumHelp
         enum = input_options[:collection] || @builder.options[:collection]
         raise "Attribute '#{attribute_name}' has no enum class" unless enum ||= object.class.send(attribute_name.to_s.pluralize)
 
-        collect = object.class.send("#{attribute_name.to_s.pluralize}_i18n", enum.to_h).to_a
+        enum = enum.keys if enum.is_a? Hash
+
+        collect = begin
+          collection = object.class.send("#{attribute_name.to_s.pluralize}_i18n")
+          collection.slice!(*enum) if enum
+          collection.invert.to_a
+        end
+
         # collect.unshift [args.last[:prompt],''] if args.last.is_a?(Hash) && args.last[:prompt]
 
         if respond_to?(:input_options)
