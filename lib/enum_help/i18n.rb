@@ -42,9 +42,10 @@ module EnumHelp
 
       klass.instance_eval <<-METHOD, __FILE__, __LINE__
       def #{collection_i18n_method_name}
-        #{collection_method_name}.collect do |label, _|
+        collection_array = #{collection_method_name}.collect do |label, _|
           [label, ::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label)]
-        end.to_h.with_indifferent_access
+        end
+        Hash[collection_array].with_indifferent_access
       end
       METHOD
     end
