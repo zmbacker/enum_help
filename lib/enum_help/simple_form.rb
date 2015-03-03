@@ -18,7 +18,7 @@ module EnumHelp
 
 
       def is_enum_attributes?( attribute_name )
-        object.class.respond_to?(attribute_name.pluralize) && attribute_name.pluralize != "references"
+        object.class.defined_enums.key?(attribute_name)
       end
 
 
