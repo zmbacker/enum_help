@@ -76,7 +76,7 @@ Other arguments for `simple_form` are supported perfectly.
 e.g.
 
 ```erb
-<%= f.input :status, prompt: 'Please select a stauts' %>
+<%= f.input :status, prompt: 'Please select a status' %>
 
 <%= f.input :status, as: :string %>
 ```
