@@ -94,7 +94,7 @@ e.g.
 I18n local file example:
 
 ```yaml
-# config/locals/model/order.zh-cn.yml
+# config/locales/model/order.zh-cn.yml
 zh-cn:
   enums:
     order:
