@@ -28,7 +28,7 @@ module EnumHelp
       def #{attr_i18n_method_name}
         enum_label = self.send(:#{attr_name})
         if enum_label
-          ::EnumHelp::Helper.translate_enum_label(self.class, :#{attr_name}, enum_label)
+          ::EnumHelp::Helper.translate_enum_label(#{klass}, :#{attr_name}, enum_label)
         else
           nil
         end
