@@ -76,7 +76,7 @@ Other arguments for `simple_form` are supported perfectly.
 e.g.
 
 ```erb
-<%= f.input :status, prompt: 'Please select a stauts' %>
+<%= f.input :status, prompt: 'Please select a status' %>
 
 <%= f.input :status, as: :string %>
 ```
@@ -94,7 +94,7 @@ e.g.
 I18n local file example:
 
 ```yaml
-# config/locals/model/order.zh-cn.yml
+# config/locales/model/order.zh-cn.yml
 zh-cn:
   enums:
     order:

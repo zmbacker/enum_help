@@ -51,7 +51,7 @@ module EnumHelp
     end
 
     def self.translate_enum_label(klass, attr_name, enum_label)
-      ::I18n.t("enums.#{klass.to_s.underscore}.#{attr_name}.#{enum_label}", default: enum_label)
+      ::I18n.t("enums.#{klass.to_s.underscore.gsub('/', '.')}.#{attr_name}.#{enum_label}", default: enum_label.humanize)
     end
 
   end
