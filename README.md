@@ -23,8 +23,8 @@ Version 0.0.15 changes the behaviour of namespaced modules as per [this commit](
 To
 
     enums:
-      foo/
-        bar
+      foo:
+        bar:
           baz:
             abc:
               lorem: 'Ipsum'
