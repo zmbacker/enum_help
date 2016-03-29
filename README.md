@@ -8,6 +8,31 @@ As you know in Rails 4.1.0 , ActiveRecord supported Enum method. But it doesn't 
 
 This gem can help you work fine with Enum feather, I18n and simple_form
 
+## Breaking Changes
+
+Version 0.0.15 changes the behaviour of namespaced modules as per [this commit](https://github.com/zmbacker/enum_help/commit/fd1c09bcc5402b97bbf4d35313ce84cdffbe47d3): standard en.yml structures for enums `Foo::Bar::Baz#abc` and `Foo::Bar::Bat#def` change from
+
+    enums:
+      foo/bar/baz:
+        abc:
+          lorem: 'Ipsum'
+      foo/bar/bat:
+        abc: 
+          lorem: 'Ipsum'
+
+To
+
+    enums:
+      foo:
+        bar:
+          baz:
+            abc:
+              lorem: 'Ipsum'
+          bat:
+            abc: 
+              lorem: 'Ipsum'
+
+For different I18n backends, adjust accordingly as namespaced modules are now referenced by `.` rather than `/`.
 
 ## Installation
 
