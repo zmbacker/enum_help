@@ -24,15 +24,12 @@ module EnumHelp
 
     def self.define_attr_i18n_method(klass, attr_name)
       attr_i18n_method_name = "#{attr_name}_i18n"
+      collection_i18n_method_name = "#{attr_name.to_s.pluralize}_i18n"
 
       klass.class_eval <<-METHOD, __FILE__, __LINE__
       def #{attr_i18n_method_name}
         enum_label = self.send(:#{attr_name})
-        if enum_label
-          ::EnumHelp::Helper.translate_enum_label(self.class, :#{attr_name}, enum_label)
-        else
-          nil
-        end
+        class.send(:#{collection_i18n_method_name})[enum_label]
       end
       METHOD
     end
