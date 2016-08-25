@@ -43,10 +43,12 @@ module EnumHelp
 
       klass.instance_eval <<-METHOD, __FILE__, __LINE__
       def #{collection_i18n_method_name}
-        collection_array = #{collection_method_name}.collect do |label, _|
-          [label, ::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label)]
+        @#{collection_i18n_method_name} ||= begin
+          collection_array = #{collection_method_name}.collect do |label, _|
+            [label, ::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label)]
+          end
+          Hash[collection_array].with_indifferent_access
         end
-        Hash[collection_array].with_indifferent_access
       end
       METHOD
     end
@@ -57,10 +59,12 @@ module EnumHelp
 
       klass.instance_eval <<-METHOD, __FILE__, __LINE__
       def #{collection_i18n_options_method_name}
-        collection_array = #{collection_method_name}.collect do |label, value|
-          [::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label), value]
+        @#{collection_i18n_options_method_name} ||= begin
+          collection_array = #{collection_method_name}.collect do |label, value|
+            [::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label), value]
+          end
+          Hash[collection_array].with_indifferent_access
         end
-        Hash[collection_array].with_indifferent_access
       end
       METHOD
     end
