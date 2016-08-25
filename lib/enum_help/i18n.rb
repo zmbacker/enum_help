@@ -8,6 +8,7 @@ module EnumHelp
       definitions.each do |name, _|
         Helper.define_attr_i18n_method(self, name)
         Helper.define_collection_i18n_method(self, name)
+        Helper.define_collection_i18n_options_method(self, name)
       end
     end
 
@@ -23,15 +24,12 @@ module EnumHelp
 
     def self.define_attr_i18n_method(klass, attr_name)
       attr_i18n_method_name = "#{attr_name}_i18n"
+      collection_i18n_method_name = "#{attr_name.to_s.pluralize}_i18n"
 
       klass.class_eval <<-METHOD, __FILE__, __LINE__
       def #{attr_i18n_method_name}
         enum_label = self.send(:#{attr_name})
-        if enum_label
-          ::EnumHelp::Helper.translate_enum_label(self.class, :#{attr_name}, enum_label)
-        else
-          nil
-        end
+        class.send(:#{collection_i18n_method_name})[enum_label]
       end
       METHOD
     end
@@ -42,10 +40,28 @@ module EnumHelp
 
       klass.instance_eval <<-METHOD, __FILE__, __LINE__
       def #{collection_i18n_method_name}
-        collection_array = #{collection_method_name}.collect do |label, _|
-          [label, ::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label)]
+        @#{collection_i18n_method_name} ||= begin
+          collection_array = #{collection_method_name}.collect do |label, _|
+            [label, ::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label)]
+          end
+          Hash[collection_array].with_indifferent_access
         end
-        Hash[collection_array].with_indifferent_access
+      end
+      METHOD
+    end
+
+    def self.define_collection_i18n_options_method(klass, attr_name)
+      collection_method_name = "#{attr_name.to_s.pluralize}"
+      collection_i18n_options_method_name = "#{collection_method_name}_i18n_options"
+
+      klass.instance_eval <<-METHOD, __FILE__, __LINE__
+      def #{collection_i18n_options_method_name}
+        @#{collection_i18n_options_method_name} ||= begin
+          collection_array = #{collection_method_name}.collect do |label, value|
+            [::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label), value]
+          end
+          Hash[collection_array].with_indifferent_access
+        end
       end
       METHOD
     end
