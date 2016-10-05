@@ -4,7 +4,7 @@ module EnumHelp
   module SimpleForm
     module BuilderExtension
 
-      def default_input_type_with_enum(*args, &block)
+      def default_input_type(*args, &block)
         att_name = (args.first || @attribute_name).to_s
         options = args.last
         return :enum_radio_buttons if options.is_a?(Hash) && options[:as] == :radio_buttons &&
@@ -13,7 +13,7 @@ module EnumHelp
         return :enum if (options.is_a?(Hash) ? options[:as] : @options[:as]).nil? &&
                         is_enum_attributes?( att_name )
 
-        default_input_type_without_enum(*args, &block)
+        super(*args, &block)
       end
 
 
@@ -71,11 +71,10 @@ end
 
 
 SimpleForm::FormBuilder.class_eval do
-  include EnumHelp::SimpleForm::BuilderExtension
+  prepend EnumHelp::SimpleForm::BuilderExtension
 
   map_type :enum,               :to => EnumHelp::SimpleForm::EnumInput
   map_type :enum_radio_buttons, :to => EnumHelp::SimpleForm::EnumRadioButtons
   alias_method :collection_enum_radio_buttons, :collection_radio_buttons
   alias_method :collection_enum, :collection_select
-  alias_method_chain :default_input_type, :enum
 end
