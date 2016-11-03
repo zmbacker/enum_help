@@ -28,7 +28,7 @@ module EnumHelp
       def #{attr_i18n_method_name}
         enum_label = self.send(:#{attr_name})
         if enum_label
-          ::EnumHelp::Helper.translate_enum_label(self.class, :#{attr_name}, enum_label)
+          ::EnumHelp::Helper.translate_enum_label('#{klass}', :#{attr_name}, enum_label)
         else
           nil
         end
@@ -43,7 +43,7 @@ module EnumHelp
       klass.instance_eval <<-METHOD, __FILE__, __LINE__
       def #{collection_i18n_method_name}
         collection_array = #{collection_method_name}.collect do |label, _|
-          [label, ::EnumHelp::Helper.translate_enum_label(self, :#{attr_name}, label)]
+          [label, ::EnumHelp::Helper.translate_enum_label('#{klass}', :#{attr_name}, label)]
         end
         Hash[collection_array].with_indifferent_access
       end
