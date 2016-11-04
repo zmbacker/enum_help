@@ -17,7 +17,7 @@ Version 0.0.15 changes the behaviour of namespaced modules as per [this commit](
         abc:
           lorem: 'Ipsum'
       foo/bar/bat:
-        abc: 
+        def:
           lorem: 'Ipsum'
 
 To
@@ -29,7 +29,7 @@ To
             abc:
               lorem: 'Ipsum'
           bat:
-            abc: 
+            def:
               lorem: 'Ipsum'
 
 For different I18n backends, adjust accordingly as namespaced modules are now referenced by `.` rather than `/`.
@@ -58,7 +58,7 @@ In model file:
 ```ruby
 class Order < ActiveRecord::Base
   enum status: { "nopayment" => 0, "finished" => 1, "failed" => 2, "destroyed" => 3 }
-      
+
   def self.restricted_statuses
     statuses.except :failed, :destroyed
   end
