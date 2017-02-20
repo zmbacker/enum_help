@@ -41,9 +41,9 @@ module EnumHelp
       collection_i18n_method_name = "#{collection_method_name}_i18n"
 
       klass.instance_eval <<-METHOD, __FILE__, __LINE__
-      def #{collection_i18n_method_name}
-        collection_array = #{collection_method_name}.collect do |label, _|
-          [label, ::EnumHelp::Helper.translate_enum_label('#{klass}', :#{attr_name}, label)]
+      def #{collection_i18n_method_name}(ids = :lables)
+        collection_array = #{collection_method_name}.collect do |label, value|
+          [(ids == :values ? value : label), ::EnumHelp::Helper.translate_enum_label('#{klass}', :#{attr_name}, label)]
         end
         Hash[collection_array].with_indifferent_access
       end
