@@ -25,10 +25,10 @@ module EnumHelp
       attr_i18n_method_name = "#{attr_name}_i18n"
 
       klass.class_eval <<-METHOD, __FILE__, __LINE__
-      def #{attr_i18n_method_name}
+      def #{attr_i18n_method_name}(locale = ::I18n.locale)
         enum_label = self.send(:#{attr_name})
         if enum_label
-          ::EnumHelp::Helper.translate_enum_label('#{klass}', :#{attr_name}, enum_label)
+          ::EnumHelp::Helper.translate_enum_label('#{klass}', :#{attr_name}, enum_label, locale)
         else
           nil
         end
@@ -41,17 +41,21 @@ module EnumHelp
       collection_i18n_method_name = "#{collection_method_name}_i18n"
 
       klass.instance_eval <<-METHOD, __FILE__, __LINE__
-      def #{collection_i18n_method_name}
+      def #{collection_i18n_method_name}(locale = ::I18n.locale)
         collection_array = #{collection_method_name}.collect do |label, _|
-          [label, ::EnumHelp::Helper.translate_enum_label('#{klass}', :#{attr_name}, label)]
+          [label, ::EnumHelp::Helper.translate_enum_label('#{klass}', :#{attr_name}, label, locale)]
         end
         Hash[collection_array].with_indifferent_access
       end
       METHOD
     end
 
-    def self.translate_enum_label(klass, attr_name, enum_label)
-      ::I18n.t("enums.#{klass.to_s.underscore.gsub('/', '.')}.#{attr_name}.#{enum_label}", default: enum_label.humanize)
+    def self.translate_enum_label(klass, attr_name, enum_label, locale = ::I18n.locale)
+      if locale.nil? || !::I18n.available_locales.include?(locale.to_sym)
+        locale = ::I18n.locale
+      end
+
+      ::I18n.t("enums.#{klass.to_s.underscore.gsub('/', '.')}.#{attr_name}.#{enum_label}", locale: locale, default: enum_label.humanize)
     end
 
   end
