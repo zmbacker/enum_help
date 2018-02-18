@@ -113,7 +113,12 @@ e.g.
 <%= f.input :status, as: :radio_buttons %>
 ```
 
+Check boxes with i18n labels are supported as well (use a serialized array in ActiveRecord):
 
+e.g.
+```erb
+<%= f.input :vaccinations, as: :check_boxes %>
+```
 
 
 I18n local file example:
