@@ -9,6 +9,8 @@ module EnumHelp
         options = args.last
         return :enum_radio_buttons if options.is_a?(Hash) && options[:as] == :radio_buttons &&
                                       is_enum_attributes?( att_name )
+        return :enum_check_boxes if options.is_a?(Hash) && options[:as] == :check_boxes &&
+                                    is_enum_attributes?( att_name )
 
         return :enum if (options.is_a?(Hash) ? options[:as] : @options[:as]).nil? &&
                         is_enum_attributes?( att_name )
@@ -69,12 +71,18 @@ class EnumHelp::SimpleForm::EnumRadioButtons < ::SimpleForm::Inputs::CollectionR
 
 end
 
+class EnumHelp::SimpleForm::EnumCheckBoxes < ::SimpleForm::Inputs::CollectionCheckBoxesInput
+  include EnumHelp::SimpleForm::InputExtension
+
+end
 
 SimpleForm::FormBuilder.class_eval do
   prepend EnumHelp::SimpleForm::BuilderExtension
 
   map_type :enum,               :to => EnumHelp::SimpleForm::EnumInput
   map_type :enum_radio_buttons, :to => EnumHelp::SimpleForm::EnumRadioButtons
+  map_type :enum_check_boxes,   :to => EnumHelp::SimpleForm::EnumCheckBoxes
   alias_method :collection_enum_radio_buttons, :collection_radio_buttons
+  alias_method :collection_enum_check_boxes, :collection_check_boxes
   alias_method :collection_enum, :collection_select
 end
