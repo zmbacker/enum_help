@@ -1,0 +1,16 @@
+zh-CN:
+  activerecord:
+    models:
+      user: "用户"
+    attributes:
+      user:
+        id: "ID"
+        gender: "性别"
+  enums:
+    user:
+      gender:
+        male: "男"
+        female: "女"
+      status:
+        normal: "正常"
+        disable: "禁用"
