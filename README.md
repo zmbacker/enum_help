@@ -146,6 +146,7 @@ Thanks for all the [contributors](https://github.com/zmbacker/enum_help/graphs/c
 
 1. Fork it ( http://github.com/zmbacker/enum_help/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+3. Run test `rspec`
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create new Pull Request

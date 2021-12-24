@@ -1,0 +1,16 @@
+zh-CN:
+  activerecord:
+    models:
+      user: "User"
+    attributes:
+      user:
+        id: "ID"
+        gender: "Gender"
+  enums:
+    user:
+      gender:
+        male: "Male"
+        female: "Female"
+      status:
+        normal: "Normal"
+        disable: "Disable"
