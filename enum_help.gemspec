@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["zm.backer@gmail.com"]
   spec.summary       = %q{ Extends of ActiveRecord::Enum, which can used in simple_form and internationalization }
   spec.description   = %q{ Help ActiveRecord::Enum feature to work fine with I18n and simple_form.  }
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/zmbacker/enum_help"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
