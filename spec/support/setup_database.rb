@@ -1,7 +1,8 @@
 ActiveRecord::Base.configurations = { "test"=> {"adapter"=>"sqlite3", "database"=>":memory:"} }
 ActiveRecord::Base.establish_connection :test
 
-class CreateAllTables < ActiveRecord::Migration[7.0]
+version = "#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}"
+class CreateAllTables < ActiveRecord::Migration[version]
   def change
     create_table :users do |t|
       t.integer :gender, null: false, default: 0, limit: 1

@@ -3,7 +3,11 @@ require 'spec_helper'
 EnumHelp::Railtie.initializers.each(&:run)
 
 class User < ActiveRecord::Base
-  enum gender: [:male, :female], _default: :male
+  if ActiveRecord.version < Gem::Version.new('6.1')
+    enum gender: [:male, :female]
+  else
+    enum gender: [:male, :female], _default: :male
+  end
 
   enum status: %i[normal disable]
 end
