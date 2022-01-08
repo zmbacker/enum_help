@@ -88,7 +88,7 @@ In `_form.html.erb` using `simple_form`:
 <%= f.input :status %>
 ```
 
-This will generate select field with translations automaticlly.
+This will generate select field with translations automatically.
 
 And if you want to generate select except some values, then you can pass a collection option.
 
@@ -106,7 +106,7 @@ e.g.
 <%= f.input :status, as: :string %>
 ```
 
-From version 0.0.10, enum_help can automaticlly generate radio buttons with i18n labels.
+From version 0.0.10, enum_help can automatically generate radio buttons with i18n labels.
 
 e.g.
 ```erb
@@ -133,7 +133,7 @@ zh-cn:
 
 ## Notice
 If you want to use enum feature, field of your table can't be named with `reference`.
-When it is named with 'reference' and define enum in model file, there will be raise an error as below:
+When it is named with 'reference' and define enum in model file, there will be raised an error as below:
 
     NoMethodError: super: no superclass method `enum' for...
 
