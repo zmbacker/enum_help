@@ -1,5 +1,8 @@
 # EnumHelp
 
+[![Gem Version](https://badge.fury.io/rb/enum_help.svg)](https://rubygems.org/gems/enum_help)
+[![Build Status](https://github.com/zmbacker/enum_help/actions/workflows/ci.yml/badge.svg)](https://github.com/zmbacker/enum_help/actions/workflows/ci.yml)
+
 Help ActiveRecord::Enum feature to work fine with I18n and simple_form.
 
 Make Enum field correctly generate select field.
