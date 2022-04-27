@@ -2,19 +2,22 @@ module EnumHelp
 
   module I18n
 
-    if ActiveRecord::VERSION::MAJOR == 7
+    if ActiveRecord::VERSION::MAJOR >= 7
       # overwrite the enum method
       def enum(name = nil, values = nil, **options)
         super(name, values, **options)
-
-        definitions = options.slice!(:_prefix, :_suffix, :_scopes, :_default)
-        definitions.each do |name, _|
+        if name # For new syntax in Rails7
           Helper.define_attr_i18n_method(self, name)
           Helper.define_collection_i18n_method(self, name)
+        else
+          definitions = options.slice!(:_prefix, :_suffix, :_scopes, :_default)
+          definitions.each do |name, _|
+            Helper.define_attr_i18n_method(self, name)
+            Helper.define_collection_i18n_method(self, name)
+          end
         end
       end
-    end
-    if ActiveRecord::VERSION::MAJOR < 7
+    else
       # overwrite the enum method
       def enum( definitions )
         super( definitions )

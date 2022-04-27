@@ -5,8 +5,10 @@ EnumHelp::Railtie.initializers.each(&:run)
 class User < ActiveRecord::Base
   if ActiveRecord.version < Gem::Version.new('6.1')
     enum gender: [:male, :female]
-  else
+  elsif ActiveRecord.version < Gem::Version.new('7.0')
     enum gender: [:male, :female], _default: :male
+  else # Rails 7.0 or higher
+    enum :gender, [:male, :female], default: :male
   end
 
   enum status: %i[normal disable]
