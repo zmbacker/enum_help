@@ -5,7 +5,8 @@ module EnumHelp
     if ActiveRecord::VERSION::MAJOR >= 7
       # overwrite the enum method
       def enum(name = nil, values = nil, **options)
-        super(name, values, **options)
+        definitions = super
+
         if name # For new syntax in Rails7
           Helper.define_attr_i18n_method(self, name)
           Helper.define_collection_i18n_method(self, name)
@@ -16,6 +17,8 @@ module EnumHelp
             Helper.define_collection_i18n_method(self, name)
           end
         end
+
+        definitions
       end
     else
       # overwrite the enum method
