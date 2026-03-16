@@ -6,7 +6,7 @@ gemspec
 gem 'bundler'
 gem 'rake'
 gem 'rspec'
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.4'
 
 case version = ENV['RAILS_VERSION']
 when nil
